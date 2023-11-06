@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cheking</title>
+    <!-- <link rel="stylesheet" type="text/css" href="CSS_files/vocabulary_cheking.css">
+        CSS code-->
+    <style>
+        body {
+            background-color: rgba(86.67%,81.57%,78.43%, 1) ;
+        }
+        .vocabulary_cheking_div {
+            background-color: rgba(86.67%,81.57%,78.43%, 1) ;
+        }
+        .voc_cheking_list {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            margin-top:58px;
+            margin-bottom: 58px;
+        }
+        .voc_cheking_list p {
+            font-size: 72px;
+            font-weight: bold;
+            margin: 22px 0;
+        }
+
+        .voc_chek_position {
+            color: rgb(52, 52, 239);
+        }
+        .in_correct {
+            color: rgb(250, 59, 59);
+        }
+
+        .voc_chek_eng_t, .voc_chek_uzb_t {
+            color: rgb(101, 41, 152);
+        }
+
+        .voc_cheking_button {
+            display: flex;
+            justify-content: center;
+        }
+        .voc_cheking_button button {
+            width: 32%;
+            height: 120px;
+            margin: 20px 0;
+            border: 4px solid green;
+            border-radius: 32px;
+            font-size: 82px;
+            font-weight: bold;
+            color: rgb(101, 41, 152);
+            background-color: rgb(83, 245, 234);
+        }
+    </style>
+</head>
+<body>
+    <div class="vocabulary_cheking_div">
+        <div class="voc_cheking_list">
+            <p class="voc_chek_position">Corrext/or/INcorrect</p>
+            <p class="voc_chek_eng_t">English_Word</p>
+            <p class="voc_chek_uzb_t">Uzbek_Word</p>
+        </div>
+        <div class="voc_cheking_button">
+            <button class="voc_cheking_next" onclick="
+                NextPage();
+                "> 
+                Next
+            </button>
+        </div>
+    </div>
+
+    <!-- <script src="JavaScript_files/vocabulary_cheking.js"></script>
+        J.S code-->
+    <script>
+        // ----< Matn bilan ishlash >-----
+        let String_text ='';
+        let choise_of_mine = 0;
+        let NumOfLines = 0;
+        let RanNum = 0;
+        let RanNumFor4 = [0, 0, 0, 0];
+        let StrForRNFor4 = ['', '', '', ''];
+        let arENG = ['', '', '', ''];
+        let arUZB = ['', '', '', ''];
+        let TrueAnswer = 0;
+
+
+        ChekingTheAnswer();
+        UpDatePage();
+
+        // in that we chaked answer
+        function ChekingTheAnswer() {
+            TrueAnswer = JSON.parse(localStorage.getItem('TrueAnswer_InLS'));
+            arENG = JSON.parse(localStorage.getItem('arENG_InLS'));
+            arUZB = JSON.parse(localStorage.getItem('arUZB_InLS'));
+            choise_of_mine =Number(JSON.parse(localStorage.getItem('choised_optins')));
+            console.log(TrueAnswer);
+            console.log(arENG[TrueAnswer]);
+            console.log(arUZB[TrueAnswer]);
+            console.log(choise_of_mine);
+        }
+
+        // got othe naext page
+        function NextPage() {
+            window.location.href = 'index.html';
+        }
+
+        // for this we update the page
+        function UpDatePage() {
+            if (TrueAnswer === choise_of_mine) {
+                document.querySelector('.voc_chek_position').innerHTML =
+                'Correct';
+                document.querySelector('.voc_chek_position').
+                    classList.remove('in_correct');
+            } else {
+                document.querySelector('.voc_chek_position').innerHTML =
+                'In-correct';
+                document.querySelector('.voc_chek_position').
+                    classList.add('in_correct');
+            }
+            document.querySelector('.voc_chek_eng_t').innerHTML =
+            arENG[TrueAnswer];
+            document.querySelector('.voc_chek_uzb_t').innerHTML =
+            arUZB[TrueAnswer];
+        }
+    </script>
+</body>
+</html>
